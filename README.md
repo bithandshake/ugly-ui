@@ -57,6 +57,6 @@ the `import-styles` component at the beginning of the scope where you want to us
 
 ### Examples
 
-With Ugly UI elements you can create such `beautiful` developer tools like this:
+With Ugly UI elements you can create such <i>beautiful</i> developer tools like this:
 
 ![sample1](https://github.com/bithandshake/ugly-ui/blob/release/resources/images/example1.png?raw=true)
