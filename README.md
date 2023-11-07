@@ -37,6 +37,8 @@ You can track the changes of the <strong>ugly-ui</strong> library [here](CHANGES
 
 - [How to use Ugly UI elements?](#how-to-use-ugly-ui-elements)
 
+- [Examples](#examples)
+
 ### How to use Ugly UI elements?
 
 The only preparation that you have to do before using Ugly UI elements is that you must place
@@ -53,6 +55,8 @@ the `import-styles` component at the beginning of the scope where you want to us
        [ugly-elements/button {:on-click #(...) :label "My button"}]
 ```
 
+### Examples
+
 With Ugly UI elements you can create such `beautiful` developer tools like this:
 
-![sample1](https://github.com/bithandshake/ugly-ui/blob/release/resources/images/sample1.png?raw=true)
+![sample1](https://github.com/bithandshake/ugly-ui/blob/release/resources/images/example1.png?raw=true)
