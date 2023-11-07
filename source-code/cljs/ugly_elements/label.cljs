@@ -10,12 +10,12 @@
   ; @param (keyword)(opt) label-id
   ; @param (map) label-props
   ; {:font-size (keyword)(opt)
-  ;   :xs, :s, :m
+  ;   :xxs, :xs, :s, :m
   ;   Default: :s
   ;  :color (keyword)(opt)
   ;   :highlight, :muted, :default
   ;   Default: :default
-  ;  :content (string)
+  ;  :content (*)
   ;  :style (map)(opt)}
   ;
   ; @usage
@@ -29,6 +29,6 @@
   ([label-id {:keys [color content font-size style] :or {color :default font-size :s}}]
    [:pre {:id    label-id
           :style style
-          :class [:ue-label (case font-size :xs :ue-font--xs :m :ue-font--m :ue-font--s)
+          :class [:ue-label (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)
                             (case color :highlight :ue-color--highlight :muted :ue-color--muted :ue-color--default)]}
-         (str content)]))
+         (-> content)]))

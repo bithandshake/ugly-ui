@@ -9,6 +9,8 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 
 ### Index
 
+- [badge](#badge)
+
 - [box](#box)
 
 - [breadcrumbs](#breadcrumbs)
@@ -29,9 +31,70 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 
 - [row](#row)
 
+- [text-field](#text-field)
+
 - [textarea](#textarea)
 
 - [toolbar](#toolbar)
+
+---
+
+### badge
+
+```
+@param (keyword)(opt) badge-id
+@param (map) badge-props
+{:content (*)
+ :fill-color (keyword)(opt)
+  :highlight, :muted, :primary, :secondary, :success, :warning
+  Default: :primary
+ :style (map)(opt)}
+```
+
+```
+@usage
+[badge {...}]
+```
+
+```
+@usage
+[badge :my-badge {...}]
+```
+
+```
+@usage
+[button {:content [:<> "My button"
+                       [badge {...}]]}]
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn element
+  ([badge-props]
+   [element (random/generate-keyword) badge-props])
+
+  ([badge-id {:keys [content fill-color style] :or {fill-color :primary}}]
+   [:pre {:class [:ue-badge :ue-font--xxs (case fill-color :highlight :ue-fill-color--highlight :muted :ue-fill-color--muted :secondary :ue-fill-color--secondary :success :ue-fill-color--success :warning :ue-fill-color--warning :ue-fill-color--primary)]
+          :id    badge-id
+          :style style}
+         (-> content)]))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [ugly-elements.api :refer [badge]]))
+
+(ugly-elements.api/badge ...)
+(badge                   ...)
+```
+
+</details>
 
 ---
 
@@ -44,7 +107,7 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
   :highlight, :muted, :default
  :content (*)
  :font-size (keyword)(opt)
-  :xs, :s, :m
+  :xxs, :xs, :s, :m
   Default: :s
  :style (map)(opt)}
 ```
@@ -70,7 +133,7 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
   ([box-id {:keys [color content font-size style] :or {font-size :s color :default}}]
    [:pre {:id    box-id
           :style style
-          :class [:ue-box (case font-size :xs :ue-font--xs :m :ue-font--m :ue-font--s)
+          :class [:ue-box (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)
                           (case color :highlight :ue-color--highlight :muted :ue-color--muted :ue-color--default)]}
          (-> content)]))
 ```
@@ -150,11 +213,11 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 ```
 @param (keyword)(opt) button-id
 @param (map) button-props
-{:disabled? (boolean)(opt)
+{:content (*)
+ :disabled? (boolean)(opt)
  :font-size (keyword)(opt)
-  :xs, :s, :m
+  :xxs, :xs, :s, :m
   Default: :s
- :label (string)
  :on-click (function)
  :style (map)(opt)}
 ```
@@ -177,11 +240,11 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
   ([button-props]
    [element (random/generate-keyword) button-props])
 
-  ([button-id {:keys [disabled? font-size label on-click style] :or {font-size :s}}]
+  ([button-id {:keys [content disabled? font-size on-click style] :or {font-size :s}}]
    [:button (if disabled? {:class [:ue-button :ue-disabled]     :id button-id :style style}
                           {:class :ue-button :on-click on-click :id button-id :style style})
-            [:pre {:class (case font-size :xs :ue-font--s :m :ue-font--m :ue-font--s)}
-                  (-> label)]]))
+            [:pre {:class (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)}
+                  (-> content)]]))
 ```
 
 </details>
@@ -446,12 +509,12 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 @param (keyword)(opt) label-id
 @param (map) label-props
 {:font-size (keyword)(opt)
-  :xs, :s, :m
+  :xxs, :xs, :s, :m
   Default: :s
  :color (keyword)(opt)
   :highlight, :muted, :default
   Default: :default
- :content (string)
+ :content (*)
  :style (map)(opt)}
 ```
 
@@ -476,9 +539,9 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
   ([label-id {:keys [color content font-size style] :or {color :default font-size :s}}]
    [:pre {:id    label-id
           :style style
-          :class [:ue-label (case font-size :xs :ue-font--xs :m :ue-font--m :ue-font--s)
+          :class [:ue-label (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)
                             (case color :highlight :ue-color--highlight :muted :ue-color--muted :ue-color--default)]}
-         (str content)]))
+         (-> content)]))
 ```
 
 </details>
@@ -547,6 +610,64 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 
 ---
 
+### text-field
+
+```
+@param (keyword)(opt) field-id
+@param (map) field-props
+{:disabled? (boolean)(opt)
+ :label (string)
+ :on-change (function)
+ :placeholder (string)(opt)
+ :style (map)(opt)
+ :value (string)}
+```
+
+```
+@usage
+[text-field {...}]
+```
+
+```
+@usage
+[text-field :my-text-field {...}]
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn element
+  ([field-props]
+   [element (random/generate-keyword) field-props])
+
+  ([field-id {:keys [disabled? label on-change placeholder style value]}]
+   [:pre {:class :ue-font--s} (if label (str label " "))
+         [:input {:class       :ue-text-field
+                  :id          field-id
+                  :on-change   (fn [e] (-> e .-target .-value on-change))
+                  :placeholder placeholder
+                  :style       style
+                  :type        :text
+                  :value       value}]]))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [ugly-elements.api :refer [text-field]]))
+
+(ugly-elements.api/text-field ...)
+(text-field                   ...)
+```
+
+</details>
+
+---
+
 ### textarea
 
 ```
@@ -555,6 +676,7 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
 {:disabled? (boolean)(opt)
  :label (string)
  :on-change (function)
+ :placeholder (string)(opt)
  :style (map)(opt)
  :value (string)}
 ```
@@ -577,13 +699,14 @@ Functional documentation of the ugly-elements.api ClojureScript namespace
   ([textarea-props]
    [element (random/generate-keyword) textarea-props])
 
-  ([textarea-id {:keys [disabled? label on-change style value]}]
+  ([textarea-id {:keys [disabled? label on-change placeholder style value]}]
    [:pre {:class :ue-font--s}
-         [:textarea {:class     :ue-textarea
-                     :id        textarea-id
-                     :on-change (fn [e] (-> e .-target .-value on-change))
-                     :style     style
-                     :value     value}]]))
+         [:textarea {:class       :ue-textarea
+                     :id          textarea-id
+                     :on-change   (fn [e] (-> e .-target .-value on-change))
+                     :placeholder placeholder
+                     :style       style
+                     :value       value}]]))
 ```
 
 </details>

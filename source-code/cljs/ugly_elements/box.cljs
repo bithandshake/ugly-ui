@@ -13,7 +13,7 @@
   ;   :highlight, :muted, :default
   ;  :content (*)
   ;  :font-size (keyword)(opt)
-  ;   :xs, :s, :m
+  ;   :xxs, :xs, :s, :m
   ;   Default: :s
   ;  :style (map)(opt)}
   ;
@@ -28,6 +28,6 @@
   ([box-id {:keys [color content font-size style] :or {font-size :s color :default}}]
    [:pre {:id    box-id
           :style style
-          :class [:ue-box (case font-size :xs :ue-font--xs :m :ue-font--m :ue-font--s)
+          :class [:ue-box (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)
                           (case color :highlight :ue-color--highlight :muted :ue-color--muted :ue-color--default)]}
          (-> content)]))

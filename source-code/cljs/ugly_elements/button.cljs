@@ -9,11 +9,11 @@
 (defn element
   ; @param (keyword)(opt) button-id
   ; @param (map) button-props
-  ; {:disabled? (boolean)(opt)
+  ; {:content (*)
+  ;  :disabled? (boolean)(opt)
   ;  :font-size (keyword)(opt)
-  ;   :xs, :s, :m
+  ;   :xxs, :xs, :s, :m
   ;   Default: :s
-  ;  :label (string)
   ;  :on-click (function)
   ;  :style (map)(opt)}
   ;
@@ -25,8 +25,8 @@
   ([button-props]
    [element (random/generate-keyword) button-props])
 
-  ([button-id {:keys [disabled? font-size label on-click style] :or {font-size :s}}]
+  ([button-id {:keys [content disabled? font-size on-click style] :or {font-size :s}}]
    [:button (if disabled? {:class [:ue-button :ue-disabled]     :id button-id :style style}
                           {:class :ue-button :on-click on-click :id button-id :style style})
-            [:pre {:class (case font-size :xs :ue-font--s :m :ue-font--m :ue-font--s)}
-                  (-> label)]]))
+            [:pre {:class (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)}
+                  (-> content)]]))

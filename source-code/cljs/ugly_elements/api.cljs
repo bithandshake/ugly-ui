@@ -1,6 +1,7 @@
 
 (ns ugly-elements.api
-    (:require [ugly-elements.box                  :as box]
+    (:require [ugly-elements.badge                :as badge]
+              [ugly-elements.box                  :as box]
               [ugly-elements.breadcrumbs          :as breadcrumbs]
               [ugly-elements.button               :as button]
               [ugly-elements.column               :as column]
@@ -10,6 +11,7 @@
               [ugly-elements.label                :as label]
               [ugly-elements.row                  :as row]
               [ugly-elements.scope                :as scope]
+              [ugly-elements.text-field           :as text-field]
               [ugly-elements.textarea             :as textarea]
               [ugly-elements.toolbar              :as toolbar]))
 
@@ -17,6 +19,7 @@
 ;; ----------------------------------------------------------------------------
 
 ; ugly-elements.*
+(def badge                badge/element)
 (def box                  box/element)
 (def breadcrumbs          breadcrumbs/element)
 (def button               button/element)
@@ -27,5 +30,6 @@
 (def label                label/element)
 (def import-styles        scope/import-styles)
 (def row                  row/element)
+(def text-field           text-field/element)
 (def textarea             textarea/element)
 (def toolbar              toolbar/element)
