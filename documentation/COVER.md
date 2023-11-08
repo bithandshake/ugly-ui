@@ -1,7 +1,7 @@
 
 ### ugly-ui
 
-Functional documentation of the [ugly-ui](https://github.com/bithandshake/ugly-ui) ClojureScript library
+Functional documentation of the [ugly-ui](https://github.com/pretty-project/ugly-ui) ClojureScript library
 
 ---
 
