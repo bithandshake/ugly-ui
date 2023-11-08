@@ -12,13 +12,13 @@ and inputs designed for making developer tools in Clojure projects.
 ### deps.edn
 
 ```
-{:deps {bithandshake/ugly-ui {:git/url "https://github.com/bithandshake/ugly-ui"
-                              :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+{:deps {pretty-project/ugly-ui {:git/url "https://github.com/pretty-project/ugly-ui"
+                                :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
 ```
 
 ### Current version
 
-Check out the latest commit on the [release branch](https://github.com/bithandshake/ugly-ui/tree/release).
+Check out the latest commit on the [release branch](https://github.com/pretty-project/ugly-ui/tree/release).
 
 ### Documentation
 
@@ -59,4 +59,4 @@ the `import-styles` component at the beginning of the scope where you want to us
 
 With Ugly UI elements you can create such <i>beautiful</i> developer tools like this:
 
-![sample1](https://github.com/bithandshake/ugly-ui/blob/release/resources/public/images/example1.png?raw=true)
+![sample1](https://github.com/pretty-project/ugly-ui/blob/release/resources/public/images/example1.png?raw=true)
