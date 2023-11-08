@@ -12,8 +12,7 @@
               [ugly-elements.row                  :as row]
               [ugly-elements.scope                :as scope]
               [ugly-elements.text-field           :as text-field]
-              [ugly-elements.textarea             :as textarea]
-              [ugly-elements.toolbar              :as toolbar]))
+              [ugly-elements.textarea             :as textarea]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -32,4 +31,3 @@
 (def row                  row/element)
 (def text-field           text-field/element)
 (def textarea             textarea/element)
-(def toolbar              toolbar/element)
