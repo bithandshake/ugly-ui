@@ -43,5 +43,5 @@
    [:div {:class :ue-breadcrumbs
           :id    breadcrumbs-id
           :style style}
-         (letfn [(f [%1 %2] [crumb breadcrumbs-id breadcrumbs-props %1 %2])]
-                (hiccup/put-with-indexed [:<>] crumbs f))]))
+         (letfn [(f0 [%1 %2] [crumb breadcrumbs-id breadcrumbs-props %1 %2])]
+                (hiccup/put-with-indexed [:<>] crumbs f0))]))
