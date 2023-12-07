@@ -1,6 +1,6 @@
 
 (ns ugly-elements.horizontal-line
-    (:require [random.api           :as random]
+    (:require [fruits.random.api    :as random]
               [ugly-elements.styles :as styles]))
 
 ;; ----------------------------------------------------------------------------

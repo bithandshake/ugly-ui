@@ -1,6 +1,6 @@
 
 (ns ugly-elements.row
-    (:require [random.api           :as random]
+    (:require [fruits.random.api    :as random]
               [ugly-elements.styles :as styles]))
 
 ;; ----------------------------------------------------------------------------
