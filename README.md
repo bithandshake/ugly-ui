@@ -22,7 +22,7 @@ Check out the latest commit on the [release branch](https://github.com/pretty-pr
 
 ### Documentation
 
-The <strong>ugly-ui</strong> functional documentation is [available here](documentation/COVER.md).
+The <strong>ugly-ui</strong> functional documentation is [available here](https://pretty-project.github.io/ugly-ui).
 
 ### Changelog
 
