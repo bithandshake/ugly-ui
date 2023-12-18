@@ -13,7 +13,7 @@ and inputs designed for making developer tools in Clojure projects.
 
 ```
 {:deps {pretty-project/ugly-ui {:git/url "https://github.com/pretty-project/ugly-ui"
-                                :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+                                :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}}
 ```
 
 ### Current version
