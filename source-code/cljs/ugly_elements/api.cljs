@@ -17,7 +17,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; @redirect (ugly-elements.*)
+; @redirect (*/element)
 (def badge                badge/element)
 (def box                  box/element)
 (def breadcrumbs          breadcrumbs/element)
