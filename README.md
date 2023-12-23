@@ -3,7 +3,7 @@
 
 ### Overview
 
-The <strong>ugly-ui</strong> library is a set of extremely simplified UI elements
+The <strong>ugly-ui</strong> is a set of extremely simplified UI elements
 and inputs designed for making developer tools in Clojure projects.
 
 > UI components in this library are [Reagent](https://github.com/reagent-project/reagent) components.
