@@ -49,7 +49,7 @@ the `import-styles` component at the beginning of the scope where you want to us
 
 (defn my-ui
   []
-  [:<> [ugly-elements/import-styles] ; <- Place the import-styles component once in your scope.
+  [:<> [ugly-elements/import-styles] ; <- Place the import-styles component (once) in the same scope.
        [ugly-elements/label  {:content "My label"}]])
        [ugly-elements/button {:on-click #(...) :label "My button"}]
 ```
