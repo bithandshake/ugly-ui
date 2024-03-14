@@ -17,13 +17,13 @@ and inputs designed for making developer tools in Clojure projects.
 
 Check out the latest commit on the [release branch](https://github.com/pretty-project/ugly-ui/tree/release).
 
-### Documentation
-
-The <strong>ugly-ui</strong> functional documentation is [available here](https://pretty-project.github.io/ugly-ui).
-
 ### Changelog
 
 You can track the changes of the <strong>ugly-ui</strong> library [here](CHANGES.md).
+
+# Documentation
+
+The <strong>ugly-ui</strong> functional documentation is [available here](https://pretty-project.github.io/ugly-ui).
 
 # Usage
 
