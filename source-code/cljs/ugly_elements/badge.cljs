@@ -1,19 +1,25 @@
 
 (ns ugly-elements.badge
-    (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+    (:require [fruits.random.api :as random]
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) badge-id
-  ; @param (map) badge-props
-  ; {:content (*)
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:content (*)(opt)
   ;  :fill-color (keyword)(opt)
-  ;   :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
   ;   Default: :primary
-  ;  :style (map)(opt)}
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :xxs
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [badge {...}]
@@ -22,13 +28,13 @@
   ; [badge :my-badge {...}]
   ;
   ; @usage
-  ; [button {:content [:<> "My button"
-  ;                        [badge {...}]]}]
-  ([badge-props]
-   [element (random/generate-keyword) badge-props])
+  ; [button {:content [:<> "My button" [badge {...}]]}]
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([badge-id {:keys [content fill-color style] :or {fill-color :primary}}]
-   [:pre {:class [:ue-badge :ue-font--xxs (case fill-color :highlight :ue-fill-color--highlight :muted :ue-fill-color--muted :secondary :ue-fill-color--secondary :success :ue-fill-color--success :warning :ue-fill-color--warning :ue-fill-color--primary)]
-          :id    badge-id
-          :style style}
+  ([id {:keys [content style] :as props}]
+   [:pre {:id id :style style
+          :class [:ue-badge (ugly-styles/fill-color-class props :primary)
+                            (ugly-styles/font-size-class  props :xxs)
+                            (ugly-styles/text-color-class props :default)]}
          (-> content)]))

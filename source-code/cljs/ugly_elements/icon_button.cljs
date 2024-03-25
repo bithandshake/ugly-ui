@@ -1,30 +1,46 @@
 
 (ns ugly-elements.icon-button
     (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) button-id
-  ; @param (map) button-props
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
   ; {:disabled? (boolean)(opt)
-  ;  :icon (keyword)
-  ;  :label (string)
-  ;  :on-click (function)
-  ;  :style (map)(opt)}
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :default
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :xs
+  ;  :hover-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :highlight
+  ;  :icon (keyword)(opt)
+  ;  :label (string)(opt)
+  ;  :on-click-f (function)(opt)
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [icon-button {...}]
   ;
   ; @usage
   ; [icon-button :my-icon-button {...}]
-  ([button-props]
-   [element (random/generate-keyword) button-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([button-id {:keys [disabled? icon label on-click style]}]
-   [:button (if disabled? {:class [:ue-icon-button :ue-disabled]     :id button-id :style style}
-                          {:class :ue-icon-button :on-click on-click :id button-id :style style})
+  ([id {:keys [disabled? icon label on-click-f style] :as props}]
+   [:button {:id id :style style :on-click (if-not disabled? on-click-f)
+             :class [:ue-icon-button (ugly-styles/disabled-class    props)
+                                     (ugly-styles/fill-color-class  props :default)
+                                     (ugly-styles/hover-color-class props :highlight)
+                                     (ugly-styles/font-size-class   props :xs)
+                                     (ugly-styles/text-color-class  props :default)]}
             [:i   {:class [:ue-icon :material-symbols-outlined]} icon]
-            [:pre {:class :ue-font--xs} label]]))
+            [:pre {:class :ue-label} label]]))

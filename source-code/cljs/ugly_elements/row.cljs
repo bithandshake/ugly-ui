@@ -1,27 +1,37 @@
 
 (ns ugly-elements.row
     (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) row-id
-  ; @param (map) row-props
-  ; {:content (*)
-  ;  :style (map)(opt)}
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:content (*)(opt)
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :default
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :s
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [row {...}]
   ;
   ; @usage
   ; [row :my-row {...}]
-  ([row-props]
-   [element (random/generate-keyword) row-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([row-id {:keys [content style]}]
-   [:div {:class :ue-row
-          :style style
-          :id    row-id}
+  ([id {:keys [content style] :as props}]
+   [:div {:id id :style style
+          :class [:ue-row (ugly-styles/fill-color-class props :default)
+                          (ugly-styles/font-size-class  props :s)
+                          (ugly-styles/text-color-class props :default)]}
          (-> content)]))

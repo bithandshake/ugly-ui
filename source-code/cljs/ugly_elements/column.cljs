@@ -1,27 +1,37 @@
 
 (ns ugly-elements.column
-    (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+    (:require [fruits.random.api :as random]
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) column-id
-  ; @param (map) column-props
-  ; {:content (*)
-  ;  :style (map)(opt)}
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:content (*)(opt)
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :default
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :s
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [column {...}]
   ;
   ; @usage
   ; [column :my-column {...}]
-  ([column-props]
-   [element (random/generate-keyword) column-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([column-id {:keys [content style]}]
-   [:div {:class :ue-column
-          :style style
-          :id    column-id}
+  ([id {:keys [content style] :as props}]
+   [:div {:id id :style style
+          :class [:ue-column (ugly-styles/fill-color-class props :default)
+                             (ugly-styles/font-size-class  props :s)
+                             (ugly-styles/text-color-class props :default)]}
          (-> content)]))

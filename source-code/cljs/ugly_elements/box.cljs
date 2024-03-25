@@ -1,33 +1,37 @@
 
 (ns ugly-elements.box
-    (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+    (:require [fruits.random.api :as random]
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) box-id
-  ; @param (map) box-props
-  ; {:color (keyword)(opt)
-  ;   :highlight, :muted, :default
-  ;  :content (*)
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:content (*)(opt)
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :highlight
   ;  :font-size (keyword)(opt)
   ;   :xxs, :xs, :s, :m
-  ;   Default: :s
-  ;  :style (map)(opt)}
+  ;   Default: :xxs
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [box {...}]
   ;
   ; @usage
   ; [box :my-box {...}]
-  ([box-props]
-   [element (random/generate-keyword) box-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([box-id {:keys [color content font-size style] :or {font-size :s color :default}}]
-   [:pre {:id    box-id
-          :style style
-          :class [:ue-box (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)
-                          (case color :highlight :ue-color--highlight :muted :ue-color--muted :ue-color--default)]}
+  ([id {:keys [content style] :as props}]
+   [:pre {:id id :style style
+          :class [:ue-box (ugly-styles/fill-color-class props :highlight)
+                          (ugly-styles/font-size-class  props :s)
+                          (ugly-styles/text-color-class props :default)]}
          (-> content)]))

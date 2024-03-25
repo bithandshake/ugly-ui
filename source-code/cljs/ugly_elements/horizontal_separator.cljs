@@ -1,16 +1,16 @@
 
 (ns ugly-elements.horizontal-separator
     (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) separator-id
-  ; @param (map) separator-props
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
   ; {:height (keyword)(opt)
-  ;   :xs, :s, :m
+  ;   :xxs, :xs, :s, :m
   ;   Default: :s
   ;  :style (map)(opt)}
   ;
@@ -19,12 +19,9 @@
   ;
   ; @usage
   ; [horizontal-separator :my-horizontal-separator {...}]
-  ([separator-props]
-   [element (random/generate-keyword) separator-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([separator-id {:keys [height style] :or {height :s}}]
-   [:div {:id    separator-id
-          :style style
-          :class (case height :xs :ue-horizontal-separator--xs
-                              :m  :ue-horizontal-separator--m
-                                  :ue-horizontal-separator--s)}]))
+  ([id {:keys [style] :as props}]
+   [:div {:id id :style style
+          :class [:ue-horizontal-separator (ugly-styles/height-class props :s)]}]))

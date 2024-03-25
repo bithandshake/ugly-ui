@@ -1,34 +1,42 @@
 
 (ns ugly-elements.textarea
     (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) textarea-id
-  ; @param (map) textarea-props
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
   ; {:disabled? (boolean)(opt)
-  ;  :label (string)
-  ;  :on-change (function)
-  ;  :placeholder (string)(opt)
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :highlight
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :s
+  ;  :label (string)(opt)
+  ;  :on-change-f (function)(opt)
   ;  :style (map)(opt)
-  ;  :value (string)}
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default
+  ;  :value (string)(opt)}
   ;
   ; @usage
   ; [textarea {...}]
   ;
   ; @usage
   ; [textarea :my-textarea {...}]
-  ([textarea-props]
-   [element (random/generate-keyword) textarea-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([textarea-id {:keys [disabled? label on-change placeholder style value]}]
-   [:pre {:class :ue-font--s}
-         [:textarea {:class       :ue-textarea
-                     :id          textarea-id
-                     :on-change   (fn [e] (-> e .-target .-value on-change))
-                     :placeholder placeholder
-                     :style       style
-                     :value       value}]]))
+  ([id {:keys [disabled? label on-change-f placeholder style value] :as props}]
+   [:pre {:class :ue-font-size--s} (if label (str label " "))
+         [:textarea {:id id :placeholder placeholder :style style :value value
+                     :on-change (if-not disabled? (fn [e] (-> e .-target .-value on-change-f)))
+                     :class [:ue-textarea (ugly-styles/disabled-class    props)
+                                          (ugly-styles/fill-color-class  props :highlight)
+                                          (ugly-styles/font-size-class   props :s)
+                                          (ugly-styles/text-color-class  props :default)]}]]))

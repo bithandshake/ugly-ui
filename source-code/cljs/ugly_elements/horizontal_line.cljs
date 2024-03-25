@@ -1,14 +1,13 @@
 
 (ns ugly-elements.horizontal-line
-    (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+    (:require [fruits.random.api :as random]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) line-id
-  ; @param (map) line-props
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
   ; {:style (map)(opt)}
   ;
   ; @usage
@@ -16,10 +15,9 @@
   ;
   ; @usage
   ; [horizontal-line :my-horizontal-line {...}]
-  ([line-props]
-   [element (random/generate-keyword) line-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([line-id {:keys [style]}]
-   [:div {:class :ue-horizontal-line
-          :id    line-id
-          :style style}]))
+  ([id {:keys [style]}]
+   [:div {:id id :style style
+          :class [:ue-horizontal-line]}]))

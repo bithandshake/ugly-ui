@@ -1,32 +1,44 @@
 
 (ns ugly-elements.button
     (:require [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn element
-  ; @param (keyword)(opt) button-id
-  ; @param (map) button-props
-  ; {:content (*)
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:content (*)(opt)
   ;  :disabled? (boolean)(opt)
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :default
   ;  :font-size (keyword)(opt)
   ;   :xxs, :xs, :s, :m
   ;   Default: :s
-  ;  :on-click (function)
-  ;  :style (map)(opt)}
+  ;  :hover-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :highlight
+  ;  :on-click-f (function)(opt)
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :default}
   ;
   ; @usage
   ; [button {...}]
   ;
   ; @usage
   ; [button :my-button {...}]
-  ([button-props]
-   [element (random/generate-keyword) button-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([button-id {:keys [content disabled? font-size on-click style] :or {font-size :s}}]
-   [:button (if disabled? {:class [:ue-button :ue-disabled]     :id button-id :style style}
-                          {:class :ue-button :on-click on-click :id button-id :style style})
-            [:pre {:class (case font-size :xxs :ue-font--xxs :xs :ue-font--xs :m :ue-font--m :ue-font--s)}
-                  (-> content)]]))
+  ([id {:keys [content disabled? on-click-f style] :as props}]
+   [:button {:id id :style style :on-click (if-not disabled? on-click-f)
+             :class [:ue-button (ugly-styles/disabled-class    props)
+                                (ugly-styles/fill-color-class  props :default)
+                                (ugly-styles/hover-color-class props :highlight)
+                                (ugly-styles/font-size-class   props :s)
+                                (ugly-styles/text-color-class  props :default)]}
+            [:pre (-> content)]]))

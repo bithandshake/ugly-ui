@@ -2,7 +2,7 @@
 (ns ugly-elements.breadcrumbs
     (:require [fruits.hiccup.api    :as hiccup]
               [fruits.random.api    :as random]
-              [ugly-elements.styles :as styles]))
+              [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -10,38 +10,52 @@
 (defn crumb
   ; @ignore
   ;
-  ; @param (keyword) breadcrumbs-id
-  ; @param (map) breadcrumbs-props
-  ; @param (integer) crumb-dex
+  ; @param (keyword) id
+  ; @param (map) props
+  ; @param (integer) dex
   ; @param (map) crumb
-  ; {:href (string)(opt)
-  ;  :label (string)
-  ;  :on-click (function)(opt)}
-  [_ _ crumb-dex {:keys [href label on-click]}]
-  (cond href     [:a      {:href     href}     [:pre {:class :ue-font--xs} (if (zero? crumb-dex) (str label) (str " | " label))]]
-        on-click [:button {:on-click on-click} [:pre {:class :ue-font--xs} (if (zero? crumb-dex) (str label) (str " | " label))]]
-        :else    [:div    {}                   [:pre {:class :ue-font--xs} (if (zero? crumb-dex) (str label) (str " | " label))]]))
+  ; {:href-uri (string)(opt)
+  ;  :label (string)(opt)
+  ;  :on-click-f (function)(opt)}
+  [_ _ dex {:keys [href-uri label on-click-f]}]
+  (cond href-uri   [:a      {:href     href-uri}   [:pre (if (zero? dex) (str label) (str " | " label))]]
+        on-click-f [:button {:on-click on-click-f} [:pre (if (zero? dex) (str label) (str " | " label))]]
+        :else      [:div    {}                     [:pre (if (zero? dex) (str label) (str " | " label))]]))
 
-(defn element
-  ; @param (keyword)(opt) breadcrumbs-id
-  ; @param (map) breadcrumbs-props
-  ; {:crumbs (maps or symbols in vector)
-  ;   [{:href (string)(opt)
-  ;     :label (string)
-  ;     :on-click (function)(opt)}]
-  ;  :style (map)(opt)}
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn view
+  ; @param (keyword)(opt) id
+  ; @param (map) props
+  ; {:crumbs (maps in vector)
+  ;   [(map) crumb
+  ;     {:href-uri (string)(opt)
+  ;     :label (string)(opt)
+  ;     :on-click-f (function)(opt)}]
+  ;  :fill-color (keyword)(opt)
+  ;   :default, :highlight, :muted, :primary, :secondary, :success, :warning
+  ;   Default: :highlight
+  ;  :font-size (keyword)(opt)
+  ;   :xxs, :xs, :s, :m
+  ;   Default: :xs
+  ;  :style (map)(opt)
+  ;  :text-color (keyword)(opt)
+  ;   :default, :muted, :highlight
+  ;   Default: :muted}
   ;
   ; @usage
   ; [breadcrumbs {...}]
   ;
   ; @usage
   ; [breadcrumbs :my-breadcrumbs {...}]
-  ([breadcrumbs-props]
-   [element (random/generate-keyword) breadcrumbs-props])
+  ([props]
+   [view (random/generate-keyword) props])
 
-  ([breadcrumbs-id {:keys [crumbs style] :as breadcrumbs-props}]
-   [:div {:class :ue-breadcrumbs
-          :id    breadcrumbs-id
-          :style style}
-         (letfn [(f0 [%1 %2] [crumb breadcrumbs-id breadcrumbs-props %1 %2])]
+  ([id {:keys [crumbs style] :as props}]
+   [:div {:id id :style style
+          :class [:ue-breadcrumbs (ugly-styles/fill-color-class props :highlight)
+                                  (ugly-styles/font-size-class  props :xs)
+                                  (ugly-styles/text-color-class props :muted)]}
+         (letfn [(f0 [%1 %2] [crumb id props %1 %2])]
                 (hiccup/put-with-indexed [:<>] crumbs f0))]))
