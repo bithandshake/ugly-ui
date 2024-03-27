@@ -36,7 +36,7 @@
    [:pre {:class :ue-font-size--s} (if label (str label " "))
          [:input {:id id :placeholder placeholder :style style :type :text :value value
                   :on-change (if-not disabled? (fn [e] (-> e .-target .-value on-change-f)))
-                  :class [:ue-text-field (ugly-styles/disabled-class    props)
-                                         (ugly-styles/fill-color-class  props :highlight)
-                                         (ugly-styles/font-size-class   props :s)
-                                         (ugly-styles/text-color-class  props :default)]}]]))
+                  :class [:ue-text-field (ugly-styles/disabled-class   props)
+                                         (ugly-styles/fill-color-class props :highlight)
+                                         (ugly-styles/font-size-class  props :s)
+                                         (ugly-styles/text-color-class props :default)]}]]))
