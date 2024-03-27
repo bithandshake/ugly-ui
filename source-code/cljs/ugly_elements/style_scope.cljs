@@ -1,6 +1,6 @@
 
 (ns ugly-elements.style-scope
-    (:require [fruits.css.api :as css]
+    (:require [fruits.css.api  :as css]
               [ugly-styles.api :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------

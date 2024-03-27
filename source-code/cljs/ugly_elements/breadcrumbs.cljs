@@ -1,8 +1,8 @@
 
 (ns ugly-elements.breadcrumbs
-    (:require [fruits.hiccup.api    :as hiccup]
-              [fruits.random.api    :as random]
-              [ugly-styles.api :as ugly-styles]))
+    (:require [fruits.hiccup.api :as hiccup]
+              [fruits.random.api :as random]
+              [ugly-styles.api   :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

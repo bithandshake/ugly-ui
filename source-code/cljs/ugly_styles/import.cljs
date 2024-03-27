@@ -1,6 +1,6 @@
 
 (ns ugly-styles.import
-    (:require [fruits.css.api :as css]
+    (:require [fruits.css.api     :as css]
               [ugly-styles.styles :as styles]))
 
 ;; ----------------------------------------------------------------------------

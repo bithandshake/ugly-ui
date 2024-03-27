@@ -1,7 +1,7 @@
 
 (ns ugly-elements.horizontal-separator
-    (:require [fruits.random.api    :as random]
-              [ugly-styles.api :as ugly-styles]))
+    (:require [fruits.random.api :as random]
+              [ugly-styles.api   :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

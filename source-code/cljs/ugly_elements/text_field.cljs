@@ -1,7 +1,7 @@
 
 (ns ugly-elements.text-field
     (:require [fruits.random.api :as random]
-              [ugly-styles.api :as ugly-styles]))
+              [ugly-styles.api   :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

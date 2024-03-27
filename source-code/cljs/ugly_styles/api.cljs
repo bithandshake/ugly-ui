@@ -1,6 +1,6 @@
 
 (ns ugly-styles.api
-    (:require [ugly-styles.class :as class]
+    (:require [ugly-styles.class  :as class]
               [ugly-styles.import :as import]))
 
 ;; ----------------------------------------------------------------------------

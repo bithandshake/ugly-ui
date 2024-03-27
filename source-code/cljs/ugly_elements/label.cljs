@@ -1,7 +1,7 @@
 
 (ns ugly-elements.label
-    (:require [fruits.random.api    :as random]
-              [ugly-styles.api :as ugly-styles]))
+    (:require [fruits.random.api :as random]
+              [ugly-styles.api   :as ugly-styles]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
